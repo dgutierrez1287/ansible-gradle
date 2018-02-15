@@ -1,0 +1,19 @@
+---
+
+# Global Vars to be sepcified once #
+# gradle_install_dir - The directory to unpack the gradle zip to
+gradle_install_dir: /opt
+# gradle_multi_install - This will create a multi install with default and latest link folders and put all gradle installs into a certain sub directory of /usr/gradle
+gradle_multi_install: yes
+# gradle_download_destination - The destination to download the gradle archive
+gradle_download_destination: /root
+# gradle_clean_installer - This will remove the archive that was downloaded
+gradle_clean_installer: yes
+
+# gradle_download_url - The url for downloading gradle
+gradle_url: https://services.gradle.org/distributions/gradle-4.5.1-bin.zip?_ga=2.49631013.2060762346.1518524776-1810876424.1518524776
+# gradle_default - This will link gradle to /usr/bin if it is set as the default
+gradle_default: yes
+# gradle_latest - This will link a latest directory if gradle_java_like_install is set
+gradle_latest: yes
+

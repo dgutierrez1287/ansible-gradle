@@ -1,0 +1,21 @@
+---
+
+## Gradle Install Tasks for Non Grouped Installs ##
+
+- name: Unpack Gradle
+  unarchive:
+    src: "{{ gradle_download_destination }}/gradle-{{ gradle_version }}.zip"
+    dest: "{{ gradle_install_dir }}"
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Link Gradle Binary when Default
+  file:
+    src: "{{ gradle_install_dir }}/gradle-{{ gradle_version }}/bin/gradle"
+    dest: /usr/bin/gradle
+    state: link
+    owner: root
+    group: root
+  when: gradle_default

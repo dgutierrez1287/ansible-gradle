@@ -1,0 +1,41 @@
+---
+
+- name: Common Facts
+  include: facts.yml
+
+- name: Ensure Unzip is present
+  yum: 
+    name: unzip
+    state: present
+
+- name: Check for Multi Install
+  shell: "ls {{ gradle_install_dir }}/gradle | grep gradle-{{ gradle_version }}"
+  register: gradle_multi_install_check
+  ignore_errors: yes
+
+- name: Check for Single Install
+  shell: "ls {{ gradle_install_dir }}/gradle | grep gradle-{{ gradle_version }}"
+  register: gradle_single_install_check
+  ignore_errors: yes
+
+- name: Download Gradle
+  include: download-web.yml
+  static: no
+  when: (gradle_multi_install and gradle_multi_install_check.rc != 0) or 
+        (not gradle_multi_install and gradle_single_install_check.rc != 0) and 
+        (gradle_download_proto == "https" or gradle_download_proto == "http")
+
+- name: Install Gradle Multi
+  include: install-multi.yml
+  static: no 
+  when: gradle_multi_install and gradle_multi_install_check.rc != 0
+
+- name: Install Gradle Single
+  include: install-single.yml
+  static: no
+  when: not gradle_multi_install and gradle_single_install_check != 0
+
+- name: Clean Installer Archive
+  include: clean-installer.yml
+  static: no
+  when: gradle_clean_installer

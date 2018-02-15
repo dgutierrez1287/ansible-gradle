@@ -1,0 +1,8 @@
+---
+
+## Gradle Download Web Tasks ##
+- name: Download Gradle
+  get_url:
+    url: "{{ gradle_url }}"
+    dest: "{{ gradle_download_destination }}/gradle-{{ gradle_version }}.zip"
+    mode: 0755

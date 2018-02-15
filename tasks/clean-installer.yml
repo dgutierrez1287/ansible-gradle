@@ -1,0 +1,9 @@
+---
+
+# Gradle Clean Archive Tasks #
+
+- name: Ensure the installer archive is cleaned up
+  file:
+    path: "{{ gradle_download_destination }}/gradle-{{ gradle_version }}.zip"
+    state: absent
+    

@@ -1,0 +1,10 @@
+---
+
+## Common Gradle Facts ##
+- name: Get Gradle Download Protocol
+  set_fact:
+    gradle_download_proto: "{{ gradle_url | regex_replace('^(.*)://.*$', '\\1') }}"
+
+- name: Get Gradle Version
+  set_fact:
+    gradle_version: "{{ gradle_url | regex_replace('^.*gradle-(\\d+\\.\\d+(\\.\\d+)?).*$', '\\1') }}"
